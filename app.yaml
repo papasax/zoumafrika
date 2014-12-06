@@ -4,19 +4,19 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
-builtins:
-- django_wsgi: on
-- appstats: on
-
 libraries:
 - name: django
-  version: 1.5
+  version: "1.5"
 
 - name: lxml
   version: latest
 
 - name: ssl
   version: latest
+
+builtins:
+- django_wsgi: on
+- appstats: on
 
 env_variables:
     DJANGO_SETTINGS_MODULE: 'zoumapp.settings'
