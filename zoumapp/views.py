@@ -12,7 +12,7 @@ def home(request):
             pass
         html=result.read()
         htmlclean=html.replace('<div comp="wysiwyg.viewer.components.WixAds" skin="wysiwyg.viewer.skins.wixadsskins.WixAdsWebSkin" id="wixFooter"></div>','')
-        htmlclean=htmlclean.replace("http://www.wix.com/favicon.ico","http://zoumafrika.com/lyon.ico")
+        htmlclean=htmlclean.replace("http://www.wix.com/favicon.ico","http://zoumafrika.com/favicon.ico")
         return HttpResponse(htmlclean)
     elif request.method == 'POST':
         try:
