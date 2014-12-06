@@ -1,4 +1,0 @@
-app.version="1.0"
-app.engine=python
-app.launch=gunicorn zoumapp.wsgi
-
