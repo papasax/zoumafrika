@@ -22,10 +22,6 @@ env_variables:
     DJANGO_SETTINGS_MODULE: 'zoumapp.settings'
 
 handlers:
-- url: /static/admin
-  static_dir: static/admin
-  expiration: '0'
-
 - url: /favicon\.ico
   static_files: static/img/favicon.ico
   upload: static/img/favicon\.ico

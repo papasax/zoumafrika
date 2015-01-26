@@ -1,18 +1,23 @@
 import urllib2
+from bs4 import BeautifulSoup
 
 from django.http.response import HttpResponse
+from xml.dom.minidom import parseString
+import xml.dom.minidom
 
 
 def home(request):
     url = "http://alexandredesenfant.wix.com/zoumafrika"
     if request.method == 'GET':
         try:
-            result = urllib2.urlopen(url)
+            page = urllib2.urlopen(url).read()
         except urllib2.URLError, e:
             pass
-        html=result.read()
-        htmlclean=html.replace('<div comp="wysiwyg.viewer.components.WixAds" skin="wysiwyg.viewer.skins.wixadsskins.WixAdsWebSkin" id="wixFooter"></div>','')
-        htmlclean=htmlclean.replace("http://www.wix.com/favicon.ico","http://zoumafrika.com/favicon.ico")
+        page=page.replace("http://www.wix.com/favicon.ico","http://zoumafrika.com/favicon.ico")
+        soup = BeautifulSoup(page)
+        soup.select('#wixFooter')[0].extract()
+        soup.select('script')[2].append('setTimeout(function(){myChildNode = document.getElementById("WIX_ADS");myChildNode.parentNode.removeChild(myChildNode);}, 3000);')
+        htmlclean=str(soup)
         return HttpResponse(htmlclean)
     elif request.method == 'POST':
         try:
