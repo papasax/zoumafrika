@@ -13,10 +13,11 @@ def home(request):
             page = urllib2.urlopen(url).read()
         except urllib2.URLError, e:
             pass
-        page=page.replace("http://www.wix.com/favicon.ico","http://zoumafrika.com/favicon.ico")
         soup = BeautifulSoup(page)
-        soup.select('#wixFooter')[0].extract()
-        soup.select('script')[2].append('setTimeout(function(){myChildNode = document.getElementById("WIX_ADS");myChildNode.parentNode.removeChild(myChildNode);}, 3000);')
+        #pub
+        soup.select('script')[2].append('setTimeout(function(){myNode = document.getElementById("WIX_ADSdesktopTopAd");nbNodes=myNode.childNodes.length; for (var i=0;i<nbNodes;i++){myNode.removeChild(myNode.childNodes[0]);} }, 3000);')
+        #favicon
+        soup.select('script')[2].append('setTimeout(function(){el = document.getElementsByTagName("link");for (var i=0;i<el.length;i++){if (el[i].rel=="shortcut icon"){el[i].href="http://zoumafrika.com/favicon.ico";}}}, 3000);')
         htmlclean=str(soup)
         return HttpResponse(htmlclean)
     elif request.method == 'POST':
